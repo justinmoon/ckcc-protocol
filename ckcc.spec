@@ -14,7 +14,7 @@ elif platform.system() == 'Darwin':
     libusb_path = find_brew_libusb_proc.communicate()[0]
     binaries = [(libusb_path.rstrip().decode() + "/lib/libusb-1.0.dylib", ".")]
 
-a = Analysis(['hwi.py'],
+a = Analysis(['cc.py'],
              binaries=binaries,
              datas=[],
              hiddenimports=[],
@@ -26,9 +26,6 @@ a = Analysis(['hwi.py'],
              cipher=block_cipher,
              noarchive=False)
 
-if platform.system() == 'Linux':
-    a.datas += Tree('hwilib/udev', prefix='hwilib/udev')
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -37,7 +34,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='hwi',
+          name='ckcc',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

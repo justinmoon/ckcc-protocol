@@ -3,6 +3,7 @@
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+pyenv shell 3.6.8
 pip install -U pip
 pip install poetry
 
@@ -22,15 +23,17 @@ TZ=UTC find ${lib_dir} -name '*.py' -type f -execdir touch -t "201901010000.00" 
 
 # Make the standalone binary
 export PYTHONHASHSEED=42
-poetry run pyinstaller hwi.spec
+poetry run pyinstaller ckcc.spec
 unset PYTHONHASHSEED
 
 # Make the final compressed package
 pushd dist
-VERSION=`poetry run hwi --version | cut -d " " -f 2`
+# FIXME
+# VERSION=`poetry run hwi --version | cut -d " " -f 2`
+VERSION=1
 OS=`uname | tr '[:upper:]' '[:lower:]'`
 if [[ $OS == "darwin" ]]; then
     OS="mac"
 fi
-tar -czf "hwi-${VERSION}-${OS}-amd64.tar.gz" hwi
+tar -czf "ckcc-${VERSION}-${OS}-amd64.tar.gz" ckcc
 popd

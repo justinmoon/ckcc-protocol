@@ -3,6 +3,7 @@
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+pyenv shell 3.6.8
 pip install -U pip
 pip install poetry
 
