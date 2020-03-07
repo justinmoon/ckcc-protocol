@@ -71,11 +71,11 @@ $POETRY install
 
 # Do the build
 export PYTHONHASHSEED=42
-$POETRY run pyinstaller hwi.spec
+$POETRY run pyinstaller ckcc.spec
 unset PYTHONHASHSEED
 
 # Make the final compressed package
 pushd dist
-VERSION=`$POETRY run hwi --version | cut -d " " -f 2 | dos2unix`
-zip "hwi-${VERSION}-windows-amd64.zip" hwi.exe
+VERSION=1
+zip "ckcc-${VERSION}-windows-amd64.zip" ckcc.exe
 popd
